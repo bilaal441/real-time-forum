@@ -1,5 +1,7 @@
 import View from "./view.js";
 
+console.log();
+
 class NavView extends View {
   parentEl = document.querySelector(".nav");
 
