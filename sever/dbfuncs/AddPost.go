@@ -1,0 +1,53 @@
+package dbfuncs
+
+import (
+	"database/sql"
+	"log"
+	"time"
+
+	"github.com/google/uuid"
+	_ "github.com/mattn/go-sqlite3"
+)
+
+func AddPost(cookieVal,  PostTitle, PostBody string, categories []string)( string, error) {
+	database, err := sql.Open("sqlite3", "../sever/forum.db")
+	if err != nil {
+		return "", err
+	}
+
+	id, err := uuid.NewRandom()
+	if err != nil {
+		return "", err
+	}
+	created := time.Now()
+	statement, err := database.Prepare("INSERT INTO Posts VALUES (?,?,?,?,?)")
+
+	if err != nil {
+		return "", err
+	}
+	var UserId uuid.UUID
+	err = database.QueryRow("SELECT  userId FROM Sessions WHERE  Id=?", cookieVal).Scan(&UserId)
+	if err != nil {
+	return  "",err
+	}
+	
+	statement.Exec(id, PostTitle, PostBody, UserId, created)
+
+	statement, _ = database.Prepare("INSERT INTO PostCat VALUES (?,?)")
+	for _, v := range categories {
+		row := database.QueryRow("SELECT Id FROM Categories WHERE Name = ?", v)
+
+		var CatId uuid.UUID
+		err := row.Scan(&CatId)
+		if err != nil {
+			log.Fatal(err)
+
+		}
+		statement.Exec(id, CatId)
+	}
+
+	return id.String(), nil
+}
+
+// INSERT INTO Posts (Id, Title, Body, UserId, Created) VALUES
+//     ( 'testing', 'test', 'testy',  (SELECT Id from Users WHERE Username='Citric'),"14/02/2023" );
