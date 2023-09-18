@@ -209,79 +209,23 @@ export const setOnlineUsersId = (data) => {
   state.onlineUserIdsSet = new Set(data);
 };
 
-function generateRandomId() {
-  return Math.floor(Math.random() * 1000);
-}
-
-export const houses = [
-  {
-    id: generateRandomId(),
-    name: "House Stark",
-    description:
-      "House Stark of Winterfell is one of the Great Houses of Westeros. Their sigil is a grey direwolf on a white background.",
-    saying: "Winter is Coming",
-  },
-  {
-    id: generateRandomId(),
-    name: "House Lannister",
-    description:
-      "House Lannister of Casterly Rock is one of the Great Houses of Westeros. Their sigil is a golden lion on a crimson background.",
-    saying: "A Lannister always pays his debts",
-  },
-  {
-    id: generateRandomId(),
-    name: "House Targaryen",
-    description:
-      "House Targaryen is a noble family of Valyrian descent, known for their dragons. Their sigil is a red three-headed dragon on a black background.",
-    saying: "Fire and Blood",
-  },
-  {
-    id: generateRandomId(),
-    name: "House Baratheon",
-    description:
-      "House Baratheon is a noble house that originated from the Stormlands. Their sigil is a crowned black stag on a gold background.",
-    saying: "Ours is the Fury",
-  },
-  {
-    id: generateRandomId(),
-    name: "House Greyjoy",
-    description:
-      "House Greyjoy of Pyke is known for their naval prowess. Their sigil is a golden kraken on a black background.",
-    saying: "We Do Not Sow",
-  },
-  {
-    id: generateRandomId(),
-    name: "House Tyrell",
-    description:
-      "House Tyrell of Highgarden is known for their wealth and agriculture. Their sigil is a golden rose on a green background.",
-    saying: "Growing Strong",
-  },
-  {
-    id: generateRandomId(),
-    name: "House Martell",
-    description:
-      "House Martell of Sunspear hails from the deserts of Dorne. Their sigil is a red sun pierced by a gold spear.",
-    saying: "Unbowed, Unbent, Unbroken",
-  },
-  {
-    id: generateRandomId(),
-    name: "House Bolton",
-    description:
-      "House Bolton of the Dreadfort is known for their cruel and ruthless nature. Their sigil is a flayed man, red on pink.",
-    saying: "Our Blades Are Sharp",
-  },
-  {
-    id: generateRandomId(),
-    name: "House Tully",
-    description:
-      "House Tully of Riverrun is associated with rivers and fishing. Their sigil is a silver trout leaping on a blue and white striped background.",
-    saying: "Family, Duty, Honor",
-  },
-  {
-    id: generateRandomId(),
-    name: "House Arryn",
-    description:
-      "House Arryn of the Eyrie is known for its impregnable mountain fortress. Their sigil is a white falcon and crescent moon on a blue background.",
-    saying: "As High as Honor",
-  },
-];
+export const addPost = async function (data) {
+  try {
+    let cats = Object.keys(data).filter(
+      (el) => el !== "body" || el !== "title"
+    );
+    const res = await getJson("add-post", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        title: data.title,
+        body: data.body,
+        categories: cats,
+      }),
+    });
+    console.log(res);
+  } catch (err) {
+    throw err;
+  }
+};

@@ -20,11 +20,18 @@ import {
   logoutModdel,
   sortLastMessage,
   setOnlineUsersId,
-  houses,
+  getCategoriesModel,
+  addPost,
 } from "./moddel.js";
 import moddleView from "./view/moddleView.js";
 import addPostView from "./view/addPostView.js";
 import filterView from "./view/filterView.js";
+
+const controllAddPost = async (data) => {
+  try {
+    await addPost(data);
+  } catch (err) {}
+};
 
 const controllSignUp = async (data) => {
   try {
@@ -52,7 +59,7 @@ const controllSignIn = async (data) => {
     await loginModel(data);
     if (state.isLogin) {
       LoginView.clear();
-      NavView.render({username: state.username});
+      NavView.render({ username: state.username });
       LoginView.hiddeloginSignupEl();
       LoginView.showMainSection();
       await getUsers();
@@ -70,12 +77,11 @@ const controllSignIn = async (data) => {
 const controllpersist = async () => {
   try {
     await persistLoginModel();
-
     if (state.isLogin) {
       LoginView.clear();
-
-      NavView.render({username: state.username});
-      filterView.render(houses);
+      await getCategoriesModel();
+      NavView.render({ username: state.username });
+      filterView.render(state.categories);
       LoginView.hiddeloginSignupEl();
       LoginView.showMainSection();
       await getUsers();
@@ -105,8 +111,8 @@ function ws() {
       OnlineUsers.updateOnlineStatusUsers(state.onlineUserIdsSet);
       ChatView.updateOnlineStatusChat(new Set(data.data), state.chatOpenId);
     } else if (data.type === "message") {
-      const {message, created, sender_id} = data.data;
-      const {LastName, FirstName} = getUser(sender_id);
+      const { message, created, sender_id } = data.data;
+      const { LastName, FirstName } = getUser(sender_id);
       OnlineUsers.render(sortLastMessage(sender_id));
       OnlineUsers.updateOnlineStatusUsers(state.onlineUserIdsSet);
 
@@ -126,7 +132,7 @@ function ws() {
       ]);
       ChatView.scrollToBottom(state.chatOpenId);
     } else {
-      const {sender_id, typing: isTyping} = data.data;
+      const { sender_id, typing: isTyping } = data.data;
       OnlineUsers.toggleTypingUsers(sender_id, isTyping);
       ChatView.toggleTypingChat(isTyping);
     }
@@ -160,11 +166,11 @@ const controllInputTyping = (value, id) => {
   };
 
   if (value) {
-    state.socket.send(JSON.stringify({typing: true, ...obg}));
+    state.socket.send(JSON.stringify({ typing: true, ...obg }));
     localStorage.setItem("typingIndicator", JSON.stringify(obg));
   } else {
     localStorage.clear("typingIndicator");
-    state.socket.send(JSON.stringify({typing: false, ...obg}));
+    state.socket.send(JSON.stringify({ typing: false, ...obg }));
   }
 };
 
@@ -191,7 +197,7 @@ const controllShowChat = async (id, isOnline) => {
 };
 
 const controllSendMessage = (obg) => {
-  const {LastName, FirstName} = getUser(state.id);
+  const { LastName, FirstName } = getUser(state.id);
   ChatView.renderMessage([
     [
       {
@@ -215,11 +221,11 @@ const controllSendMessage = (obg) => {
 function controlClearTypingInDicator() {
   const typingUser = JSON.parse(localStorage.getItem("typingIndicator"));
   if (!typingUser) return;
-  state?.socket?.send(JSON.stringify({typing: false, ...typingUser}));
+  state?.socket?.send(JSON.stringify({ typing: false, ...typingUser }));
 }
 
 const controllAddPostForm = () => {
-  addPostView.render(houses);
+  addPostView.render(state.categories);
 };
 
 export const controllLogout = async () => {
@@ -247,4 +253,5 @@ export const controllLogout = async () => {
   ChatView.sendMessageHandler(controllSendMessage);
   NavView.logoutHandler(controllLogout);
   moddleView.openModalHandler(controllAddPostForm);
+  addPostView.addPostFormForSubmissionHandler(controllAddPost);
 })();

@@ -2,6 +2,28 @@ import View from "./view.js";
 
 class AddPostView extends View {
   parentEl = document.querySelector(".categories");
+  addPostForm = document.querySelector("#postForm");
+  #clear() {
+    this.addPostForm.reset();
+  }
+  addPostFormForSubmissionHandler(callback) {
+    this.addPostForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const formValues = Object.fromEntries(formData.entries());
+      for (const value of Object.entries(formValues)) {
+        if (value[1] === "") {
+          return;
+        }
+      }
+      if (formValues.title.length > 64 || formValues.body.length > 1024) {
+        return;
+      }
+      console.log(formValues);
+      callback(formValues);
+      this.#clear();
+    });
+  }
   generateMarkUp(data) {
     return `
     <label class="main-label">Categories:</label>
