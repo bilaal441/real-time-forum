@@ -1,4 +1,4 @@
-import {getJson} from "./helpers.js";
+import { getJson } from "./helpers.js";
 
 export const state = {
   isLogin: false,
@@ -12,6 +12,19 @@ export const state = {
   typingToUser: {},
   audio1: new Audio("./sound/croworraven1.mp3"),
   audio2: new Audio("./sound/croworraven2.mp3"),
+  categories: [],
+};
+
+export const getCategoriesModel = async () => {
+  try {
+    const res = await getJson("get-catogries", {
+      method: "GET",
+    });
+    state.categories = res;
+    console.log(state.categories);
+  } catch (err) {
+    throw err;
+  }
 };
 
 const getHeader = () => {
@@ -24,7 +37,7 @@ export const signupModel = async (data) => {
   try {
     const res = getJson("newUser", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
   } catch (err) {
@@ -94,7 +107,7 @@ export const getUsers = async () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({id: state.id}),
+      body: JSON.stringify({ id: state.id }),
       credentials: "include",
     });
     state.users = res;
@@ -127,7 +140,7 @@ export const getMessages = async (otherUserId) => {
     state.chatPage++;
 
     return res.messages.map((el) => {
-      const {FirstName, LastName} = state.users.find(
+      const { FirstName, LastName } = state.users.find(
         (user) => user.Id === el.sender_id
       );
       return {
