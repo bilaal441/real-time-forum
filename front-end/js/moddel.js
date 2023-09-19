@@ -13,6 +13,18 @@ export const state = {
   audio1: new Audio("./sound/croworraven1.mp3"),
   audio2: new Audio("./sound/croworraven2.mp3"),
   categories: [],
+  posts: [],
+};
+
+export const getPostsModel = async () => {
+  try {
+    const res = await getJson("get-posts", {
+      method: "GET",
+    });
+    state.posts = res;
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const getCategoriesModel = async () => {
@@ -212,8 +224,9 @@ export const setOnlineUsersId = (data) => {
 export const addPost = async function (data) {
   try {
     let cats = Object.keys(data).filter(
-      (el) => el !== "body" || el !== "title"
+      (el) => el !== "body" && el !== "title"
     );
+    console.log(cats);
     const res = await getJson("add-post", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -224,7 +237,8 @@ export const addPost = async function (data) {
         categories: cats,
       }),
     });
-    console.log(res);
+    console.log(res, "post return from server");
+    state.posts = [res.post, ...state.posts];
   } catch (err) {
     throw err;
   }

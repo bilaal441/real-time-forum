@@ -14,7 +14,7 @@ func FindAllPosts() ([]PostFontEnd, error) {
 		return []PostFontEnd{}, err
 
 	}
-	rows, err := database.Query("SELECT Id,Title,Body,UserId,Created FROM Posts")
+	rows, err := database.Query("SELECT Id,Title,Body,UserId,Created FROM Posts ORDER BY Created DESC")
 	if err == sql.ErrNoRows {
 		return []PostFontEnd{}, err
 	} else if err != nil {
@@ -29,7 +29,7 @@ func FindAllPosts() ([]PostFontEnd, error) {
 		var id string
 		rows.Scan(&One.Id, &One.Title, &One.Body, &id, &One.Created_at)
 
-		err = database.QueryRow("SELECT Username FROM Users WHERE Id=?", id).Scan(&One.Username)
+		err = database.QueryRow("SELECT Nickname FROM Users WHERE Id=?", id).Scan(&One.Username)
 
 		if err != nil {
 			fmt.Println(err.Error())

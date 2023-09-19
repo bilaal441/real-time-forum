@@ -597,6 +597,15 @@ button[type="submit"] {
   background-color: #0056b3;
 }
 
+.post-categories {
+  padding: 0.5rem;
+  font-size: 12px;
+}
+
+.post-categories span {
+  margin-right: 0.5rem;
+}
+
 .post-comments {
   border-top: 1px solid #2e2e2e;
   padding-top: 20px;

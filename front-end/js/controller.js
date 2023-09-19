@@ -3,6 +3,7 @@ import SignupView from "./view/SignupView.js";
 import NavView from "./view/NavView.js";
 import OnlineUsers from "./view/OnlineUsers.js";
 import ChatView from "./view/ChatView.js";
+import PostView from "./view/PostView.js";
 
 import {
   signupModel,
@@ -22,6 +23,7 @@ import {
   setOnlineUsersId,
   getCategoriesModel,
   addPost,
+  getPostsModel,
 } from "./moddel.js";
 import moddleView from "./view/moddleView.js";
 import addPostView from "./view/addPostView.js";
@@ -30,6 +32,8 @@ import filterView from "./view/filterView.js";
 const controllAddPost = async (data) => {
   try {
     await addPost(data);
+    console.log("Logging now:", state.posts[0]);
+    PostView.render([state.posts[0]]);
   } catch (err) {}
 };
 
@@ -65,7 +69,9 @@ const controllSignIn = async (data) => {
       await getUsers();
       OnlineUsers.render(state.users.filter((el) => el.Id !== state.id));
       ChatView.showUsersContainer();
-      filterView.render(houses);
+      filterView.render(state.categories);
+      await getPostsModel();
+      PostView.render(state.posts);
       ws();
     }
   } catch (err) {
@@ -86,6 +92,8 @@ const controllpersist = async () => {
       LoginView.showMainSection();
       await getUsers();
       OnlineUsers.render(state.users.filter((el) => el.Id !== state.id));
+      await getPostsModel();
+      PostView.render(state.posts);
       ws();
     } else {
       LoginView.showloginSignupEl();

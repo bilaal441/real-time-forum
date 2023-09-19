@@ -2,6 +2,7 @@ package dbfuncs
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	"time"
 
@@ -33,14 +34,20 @@ func AddPost(cookieVal,  PostTitle, PostBody string, categories []string)( strin
 	
 	statement.Exec(id, PostTitle, PostBody, UserId, created)
 
-	statement, _ = database.Prepare("INSERT INTO PostCat VALUES (?,?)")
+	statement, err= database.Prepare("INSERT INTO PostCat VALUES (?,?)")
+	if err != nil {
+		return  "",err
+		}
+      
 	for _, v := range categories {
 		row := database.QueryRow("SELECT Id FROM Categories WHERE Name = ?", v)
 
 		var CatId uuid.UUID
 		err := row.Scan(&CatId)
 		if err != nil {
+			fmt.Println("error of adding linking post with cats")
 			log.Fatal(err)
+		
 
 		}
 		statement.Exec(id, CatId)

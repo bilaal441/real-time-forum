@@ -25,7 +25,7 @@ func FindPostByID(id string) (PostFontEnd, error) {
 		return PostFontEnd{}, err
 	}
 
-	err = database.QueryRow("SELECT Username FROM Users WHERE Id=?", userId).Scan(&One.Username)
+	err = database.QueryRow("SELECT Nickname FROM Users WHERE Id=?", userId).Scan(&One.Username)
 	if err != nil {
 		fmt.Println(err.Error())
 		return PostFontEnd{}, err
