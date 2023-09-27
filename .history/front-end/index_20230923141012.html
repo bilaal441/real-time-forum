@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>realtime forum</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="js/controller.js" type="module"></script>
+  </head>
+  <body>
+    <nav class="nav hidden"></nav>
+
+    <main>
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span id="closeModalBtn" class="close">&times;</span>
+          <h1>Add Post</h1>
+          <form id="postForm">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required />
+
+            <label for="body">Body:</label>
+            <textarea id="body" name="body" rows="5" required></textarea>
+            <div class="categories"></div>
+            <input class="btn" type="submit" value="Submit" />
+          </form>
+        </div>
+      </div>
+      <section class="login-signup">
+        <div class="container">
+          <div class="form-container sign-in">
+            <h2>Sign in to realTime</h2>
+            <form action="">
+              <!-- <input type="text" placeholder="nickname" /> -->
+              <input type="email" name="email" placeholder="email" required />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+              <div class="error-el error hidden"></div>
+              <button class="btn" type="submit">Login</button>
+            </form>
+            <div class="go">
+              <span> New to realTime? </span>
+              <a class="go-signup"> create account </a>
+            </div>
+          </div>
+
+          <div class="form-container sign-up hidden">
+            <h2>create realTime account</h2>
+            <form action="">
+              <div class="form-group">
+                <input type="text" name="firstName" placeholder=" First Name" />
+                <label class="label-error hidden" for="firstName"
+                  >input First Name is required
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="text" name="lastName" placeholder="Last Name" />
+                <label class="label-error hidden" for="lastName">
+                  input last Name is required
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="number" name="age" placeholder="Age" />
+                <label class="label-error hidden" for="age">
+                  input Age is required
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="text" name="gender" placeholder="Gender" />
+                <label class="label-error hidden" for="gender">
+                  input gender is required
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="text" name="nickname" placeholder="Nickname" />
+                <label class="label-error hidden" for="nickname">
+                  input nickname is required
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="email" name="email" placeholder="Email" />
+                <label class="label-error hidden" for="email">
+                  please enter a valid email address.
+                </label>
+              </div>
+              <div class="form-group">
+                <input type="password" name="password" placeholder="Password" />
+                <label class="label-error hidden" for="password">
+                  password must be at least 8 characters long and contain
+                  letters, numbers or special character!
+                </label>
+              </div>
+              <button class="btn" type="submit">Sign Up</button>
+            </form>
+            <div class="go">
+              <span> already have an account? </span>
+              <a class="go-signin"> Sign in </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="users hidden">
+        <div class="container">
+          <div class="main-section-conatiner">
+            <div class="users-chats-conatiner">
+              <h1>chats</h1>
+              <div class="user-live">
+                <div class="users-container"></div>
+                <div class="chat-container"></div>
+              </div>
+            </div>
+            <div class="posts-add-posts-filter">
+              <div class="filter-posts"></div>
+              <div class="add-posts">
+                <button class="btn" id="openModalBtn">Add Post</button>
+              </div>
+              <div class="posts">
+              fr
+                  <!-- <div class="post-comments">
+                    <h2 class="comment-title">Comments</h2>
+                    <div class="comment">
+                      <p class="comment-meta">
+                        Commented by User456 | 1 hour ago
+                      </p>
+                      <p class="comment-text">This is a comment on the post.</p>
+
+                      <div class="comment-status">
+                        <span class="comments"
+                          ><span class="status-quantity">2</span>Comments</span
+                        >
+                        <span class="likes">
+                          <span class="status-quantity">2</span> Likes</span
+                        >
+                        <span class="dislikes">
+                          <span class="status-quantity">2</span>Dislikes</span
+                        >
+                      </div>
+                      <div class="comment-actions">
+                        <button class="like-button-comment">Like</button>
+
+                        <button class="dislike-button-comment">Dislike</button>
+                      </div>
+                    </div>
+                  </div> -->
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
