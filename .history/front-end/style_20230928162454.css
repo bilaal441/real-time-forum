@@ -728,8 +728,8 @@ button[type="submit"] {
   background: #007bff;
 }
 
-.password-info {
-  margin-bottom: 0.7rem;
+.password-info{
+  margin-bottom: 0.5rem;
 }
 
 .btn svg {

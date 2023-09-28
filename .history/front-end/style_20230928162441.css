@@ -728,9 +728,7 @@ button[type="submit"] {
   background: #007bff;
 }
 
-.password-info {
-  margin-bottom: 0.7rem;
-}
+.password-info
 
 .btn svg {
   width: 24px;
