@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 	"sever/dbfuncs"
-	handlefuncs "sever/handlefuncs"
+	handlefuncs "sever/handleFuncs"
 	"sync"
 	"time"
 
