@@ -6,9 +6,11 @@ class LoginView extends View {
   loginSubmissionHandler(callBack) {
     this.form.addEventListener("submit", (e) => {
       e.preventDefault();
-
       const formData = new FormData(e.target);
       const formValues = Object.fromEntries(formData.entries());
+      if (!formValues.email && !formValues.nickname) {
+        return;
+      }
       callBack(formValues);
     });
   }
@@ -16,10 +18,6 @@ class LoginView extends View {
   clear() {
     this.parentEl.querySelectorAll("input").forEach((el) => (el.value = ""));
   }
-
-
-
-  
 }
 
 export default new LoginView();

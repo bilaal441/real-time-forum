@@ -81,7 +81,7 @@ const controllSignUp = async (data) => {
     SignupView.clearInputs();
     SignupView.showLogin();
   } catch (err) {
-    console.log("Error in signing", err);
+    console.log("Error registering", err);
   }
 };
 
@@ -90,7 +90,7 @@ const controllSignIn = async (data) => {
     await loginModel(data);
     if (state.isLogin) {
       LoginView.clear();
-      NavView.render({username: state.username});
+      NavView.render({ username: state.username });
       LoginView.hiddeloginSignupEl();
       LoginView.showMainSection();
       await getUsers();
@@ -115,7 +115,7 @@ const controllpersist = async () => {
     if (state.isLogin) {
       LoginView.clear();
       await getCategoriesModel();
-      NavView.render({username: state.username});
+      NavView.render({ username: state.username });
       filterView.render(state.categories);
       filterView.filterHandler(controllFilter);
       LoginView.hiddeloginSignupEl();
@@ -150,8 +150,8 @@ function ws() {
       OnlineUsers.updateOnlineStatusUsers(state.onlineUserIdsSet);
       ChatView.updateOnlineStatusChat(new Set(data.data), state.chatOpenId);
     } else if (data.type === "message") {
-      const {message, created, sender_id} = data.data;
-      const {LastName, FirstName} = getUser(sender_id);
+      const { message, created, sender_id } = data.data;
+      const { LastName, FirstName } = getUser(sender_id);
       OnlineUsers.render(sortLastMessage(sender_id));
       OnlineUsers.updateOnlineStatusUsers(state.onlineUserIdsSet);
 
@@ -174,7 +174,7 @@ function ws() {
       controllLogout();
     } else {
       console.log(data);
-      const {sender_id, typing: isTyping} = data.data;
+      const { sender_id, typing: isTyping } = data.data;
       OnlineUsers.toggleTypingUsers(sender_id, isTyping);
       ChatView.toggleTypingChat(isTyping);
     }
@@ -208,11 +208,11 @@ const controllInputTyping = (value, id) => {
   };
 
   if (value) {
-    state.socket.send(JSON.stringify({typing: true, ...obg}));
+    state.socket.send(JSON.stringify({ typing: true, ...obg }));
     localStorage.setItem("typingIndicator", JSON.stringify(obg));
   } else {
     localStorage.clear("typingIndicator");
-    state.socket.send(JSON.stringify({typing: false, ...obg}));
+    state.socket.send(JSON.stringify({ typing: false, ...obg }));
   }
 };
 
@@ -239,7 +239,7 @@ const controllShowChat = async (id, isOnline) => {
 };
 
 const controllSendMessage = (obg) => {
-  const {LastName, FirstName} = getUser(state.id);
+  const { LastName, FirstName } = getUser(state.id);
   ChatView.renderMessage([
     [
       {
@@ -263,7 +263,7 @@ const controllSendMessage = (obg) => {
 function controlClearTypingInDicator() {
   const typingUser = JSON.parse(localStorage.getItem("typingIndicator"));
   if (!typingUser) return;
-  state?.socket?.send(JSON.stringify({typing: false, ...typingUser}));
+  state?.socket?.send(JSON.stringify({ typing: false, ...typingUser }));
 }
 
 const controllAddPostForm = () => {
@@ -337,7 +337,7 @@ const controllPostActions = async (data) => {
         PostView.renderCommentReaction(commentDisliked);
         break;
       case "post-comment":
-        const {comments} = state.posts.find((el) => {
+        const { comments } = state.posts.find((el) => {
           return el.id === data.postId;
         });
         PostView.renderComments(data.postId, comments);

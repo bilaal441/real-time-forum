@@ -11,6 +11,7 @@ import (
 )
 
 type LoginData struct {
+	Nickname string `json:"nickname"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
@@ -40,9 +41,9 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 		var imgUrl string
 
 		// var storedPassword string
-		err = db.QueryRow("SELECT Id, password, Nickname,  profileImg  FROM Users WHERE email=?", entredData.Email).Scan(&id, &storedPassword, &username, &imgUrl)
+		err = db.QueryRow("SELECT Id, password, Nickname,  profileImg  FROM Users WHERE nickname=? OR email=?", entredData.Nickname, entredData.Email).Scan(&id, &storedPassword, &username, &imgUrl)
 		if err != nil {
-			http.Error(w, `{"error": "your email or passord is incorrect"}`, http.StatusBadRequest)
+			http.Error(w, `{"error": "your email/nickname or password is incorrect"}`, http.StatusBadRequest)
 			return
 		}
 
