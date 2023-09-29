@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"sort"
+	"strings"
 	"time"
 
 	"github.com/google/uuid"
@@ -103,8 +104,8 @@ func GetAllUsersSortedByLastMessage(id string) ([]User, error) {
 
 	// Sort users alphabetically by FirstName and LastName for users without messages
 	sort.Slice(usersWithoutMessages, func(i, j int) bool {
-		nameI := usersWithoutMessages[i].LastName
-		nameJ := usersWithoutMessages[j].LastName
+		nameI := strings.Title(usersWithoutMessages[i].LastName)
+		nameJ := strings.Title(usersWithoutMessages[j].LastName)
 		return nameI < nameJ
 	})
 	fmt.Println(usersWithoutMessages, "usersWithoutMessages")
