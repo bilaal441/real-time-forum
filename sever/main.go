@@ -41,7 +41,7 @@ var (
 		CheckOrigin: func(r *http.Request) bool {
 			origin := r.Header.Get("Origin")
 			// Modify this to match your allowed origins
-			return origin == "http://localhost:3000"
+			return origin == "http://localhost:8000"
 
 		},
 	}
@@ -196,8 +196,8 @@ func main() {
 	http.HandleFunc("/get-messages", handlefuncs.MessagesHandler)
 	http.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("images"))))
 
-	fmt.Println("Starting server on http://localhost:8000")
-	err := http.ListenAndServe(":8000", nil)
+	fmt.Println("Starting server on http://localhost:3000")
+	err := http.ListenAndServe(":3000", nil)
 	if err != nil {
 		fmt.Println(err)
 	}

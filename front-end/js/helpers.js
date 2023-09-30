@@ -7,7 +7,7 @@ export function debounce(func, delay) {
   };
 }
 
-export const Url = "http://localhost:8000/";
+export const Url = "http://localhost:3000/";
 
 export const getJson = async (endpoint, aptions) => {
   try {

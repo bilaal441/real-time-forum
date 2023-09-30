@@ -56,7 +56,7 @@ class ChatView extends View {
       event.preventDefault();
       const el = event.target;
       if (!el.classList.contains("input-container")) return;
-      const {userid: SenderID, otheruserid: RecipientID} = el.dataset;
+      const { userid: SenderID, otheruserid: RecipientID } = el.dataset;
       const message = document.querySelector(".input");
       if (message?.value.length < 1) return;
       callBack({
@@ -124,7 +124,7 @@ class ChatView extends View {
 </button>
    <div class="user-card" >
    <div class="profile">
-     <img src="http://localhost:8000/images/${user.Img}" alt="User profile">
+     <img src="http://localhost:3000/images/${user.Img}" alt="User profile">
      <div class=" chat-indicator ${online ? "online-indicator" : ""}"></div>
    </div>
    <div class="name" >
@@ -175,7 +175,7 @@ class ChatView extends View {
     const input = document.querySelector(".input");
     input.addEventListener("input", () => {
       const form = input.closest(".input-container");
-      const {otheruserid: id} = form.dataset;
+      const { otheruserid: id } = form.dataset;
       callBack(true, id);
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
