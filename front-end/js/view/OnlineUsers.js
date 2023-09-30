@@ -37,7 +37,7 @@ class OnlineUsers extends View {
         <div class="user-card-container">
    <div class="user-card " id="user-card"  data-userid="${curr.Id}">
      <div class="profile">
-       <img src="http://localhost:8000/images/${curr.Img}" alt="User profile">
+       <img src="http://localhost:3000/images/${curr.Img}" alt="User profile">
        <div class="indicator  "></div>
      </div>
      <div class="name">
