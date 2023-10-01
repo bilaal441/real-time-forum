@@ -13,9 +13,26 @@
     <script src="js/controller.js" type="module"></script>
   </head>
   <body>
+    <audio
+      id="oceanSound"
+      src="sound/gentle-ocean-waves-birdsong-and-gull-7109.mp3"
+      preload="auto"
+      muted="true"
+      loop="true"
+    ></audio>
+    <script>
+      const audio = document.getElementById("oceanSound");
+      window.addEventListener("click", function () {
+        audio.muted = false;
+        audio.play();
+      });
+    </script>
     <nav class="nav hidden"></nav>
-
     <main>
+      <div class="ocean">
+        <div class="wave"></div>
+        <div class="wave"></div>
+      </div>
       <div id="myModal" class="modal">
         <div class="modal-content">
           <span id="closeModalBtn" class="close">&times;</span>
@@ -48,13 +65,14 @@
               <button class="btn" type="submit">Login</button>
             </form>
             <div class="go">
-              <span> New to realTime? </span>
+              <span> New to Realtime? </span>
+              <br />
               <a class="go-signup"> create account </a>
             </div>
           </div>
 
           <div class="form-container sign-up hidden">
-            <h2>create realTime account</h2>
+            <h2>Create Realtime Account</h2>
             <form action="">
               <div class="form-group">
                 <input type="text" name="firstName" placeholder=" First Name" />
@@ -119,7 +137,7 @@
         <div class="container">
           <div class="main-section-conatiner">
             <div class="users-chats-conatiner">
-              <h1>chats</h1>
+              <h1>Chats</h1>
               <div class="user-live">
                 <div class="users-container"></div>
                 <div class="chat-container"></div>

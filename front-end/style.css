@@ -7,7 +7,19 @@
   --font-size: 16px;
 }
 
+@font-face {
+  font-family: "Treasure Map";
+  src: url("Treasuremap-Ea1vj.ttf");
+}
+
 body {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 254, 234, 1) 0%,
+    rgba(255, 254, 234, 1) 35%,
+    #b7e8eb 100%
+  );
+  overflow: scroll;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -15,6 +27,53 @@ body {
   color: var(--text-color);
   font-size: var(--font-size);
   background-color: var(--secondary-color);
+  font-family: "Treasure Map";
+}
+
+.ocean {
+  height: 5%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #015871;
+}
+
+.wave {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg)
+    repeat-x;
+  position: absolute;
+  top: -198px;
+  width: 6400px;
+  height: 198px;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+.wave:nth-of-type(2) {
+  top: -175px;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+    swell 7s ease -1.25s infinite;
+  opacity: 1;
+}
+
+@keyframes wave {
+  0% {
+    margin-left: 0;
+  }
+  100% {
+    margin-left: -1600px;
+  }
+}
+
+@keyframes swell {
+  0%,
+  100% {
+    transform: translate3d(0, -25px, 0);
+  }
+  50% {
+    transform: translate3d(0, 5px, 0);
+  }
 }
 
 a {
@@ -39,6 +98,11 @@ label {
 }
 nav {
   background: var(--text-color);
+  width: 100%;
+  left: 0;
+  right: 0;
+  position: sticky;
+  top: 0;
 }
 .nav-container {
   display: flex;
@@ -48,6 +112,10 @@ nav {
 
 .logo {
   flex-grow: 1;
+}
+
+.logout {
+  font-family: "Treasure Map";
 }
 
 .hamburger-toggle {
@@ -76,6 +144,7 @@ nav {
   gap: 1rem;
   margin: 0;
   padding: 0;
+  font-family: "Treasure Map";
 }
 
 .menu-items li {
@@ -85,7 +154,9 @@ nav {
 .logo a {
   color: var(--background-color);
   font-size: 1.5rem;
+  font-family: "Treasure Map";
 }
+
 .menu-items li button {
   color: var(--background-color);
   background: transparent;
@@ -173,6 +244,10 @@ nav {
   margin: 10px;
   margin: 2rem auto;
   width: 50vh;
+  height: 80vh;
+  position: relative;
+  z-index: 10;
+  overflow: auto;
 }
 
 h2 {
@@ -220,6 +295,7 @@ input input::placeholder {
   border-radius: 4px;
   cursor: pointer;
   font-size: 1.5rem;
+  font-family: "Treasure Map";
 }
 
 .btn[disabled] {
@@ -244,6 +320,7 @@ button[type="submit"] {
   margin-top: 2rem;
   text-transform: capitalize;
   font-size: 1.5rem;
+  z-index: 10;
 }
 
 .error {
@@ -288,13 +365,15 @@ button[type="submit"] {
 
 .chat-container {
   transform: translateX(-100vw);
-  max-width: 700px;
+  width: 360px;
   max-height: 800px;
   background-color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
   padding: 1rem;
   border: 5px;
+  border-radius: 5px;
+  position: fixed;
 }
 
 .open {
@@ -736,10 +815,17 @@ button[type="submit"] {
   width: 24px;
   height: 24px;
 }
+/* 
+.users-chats-conatiner {
+  position: fixed;
+} */
 
 .users-container {
   background-color: #fff;
   padding: 1rem;
+  position: fixed;
+  max-width: 26%;
+  border-radius: 5px;
 }
 
 .fade {
