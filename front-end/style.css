@@ -650,12 +650,20 @@ button[type="submit"] {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
+  overflow: auto;
 }
 
 .filter-posts {
   display: flex;
   gap: 0.5rem;
+  /* position: sticky;
+  top: 50; */
 }
+
+/* .add-posts {
+  position: sticky;
+  top: 50;
+} */
 
 /* posts */
 
@@ -815,10 +823,11 @@ button[type="submit"] {
   width: 24px;
   height: 24px;
 }
-/* 
+
 .users-chats-conatiner {
-  position: fixed;
-} */
+  position: sticky;
+  top: 80px;
+}
 
 .users-container {
   background-color: #fff;

@@ -14,17 +14,23 @@
   </head>
   <body>
     <audio
-      id="oceanSound"
-      src="sound/gentle-ocean-waves-birdsong-and-gull-7109.mp3"
+      id="seaSound"
+      src="sound/sea.mp3"
       preload="auto"
       muted="true"
       loop="true"
     ></audio>
     <script>
-      const audio = document.getElementById("oceanSound");
+      const seaSound1 = document.getElementById("seaSound");
       window.addEventListener("click", function () {
-        audio.muted = false;
-        audio.play();
+        const seaSound2 = seaSound1.cloneNode();
+        seaSound1.muted = false;
+        seaSound2.muted = false;
+        seaSound2.volume = 0.5;
+        seaSound1.play();
+        setTimeout(function () {
+          seaSound2.play();
+        }, 10000);
       });
     </script>
     <nav class="nav hidden"></nav>
