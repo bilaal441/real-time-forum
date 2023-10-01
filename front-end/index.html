@@ -26,7 +26,8 @@
         const seaSound2 = seaSound1.cloneNode();
         seaSound1.muted = false;
         seaSound2.muted = false;
-        seaSound2.volume = 0.5;
+        seaSound1.volume = 0.5;
+        seaSound2.volume = 0.25;
         seaSound1.play();
         setTimeout(function () {
           seaSound2.play();

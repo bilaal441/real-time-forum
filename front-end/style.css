@@ -409,7 +409,7 @@ button[type="submit"] {
 }
 .message-container {
   overflow: scroll;
-  max-height: 400px;
+  max-height: 300px;
   scroll-behavior: smooth;
   padding: 0rem 1rem;
 }
