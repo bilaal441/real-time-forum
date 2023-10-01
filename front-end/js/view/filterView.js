@@ -5,8 +5,8 @@ class FilterView extends View {
   generateMarkUp(data) {
     return `
   
-    <label for="filter-posts-label">filter posts:</label>
                  <div>
+                 <label for="filter-posts-label">Filter Posts</label><br>
                 <select name="posts" id="filter-posts">
                   <option value="all">all</option>
                   <option value="created posts">created posts</option>
