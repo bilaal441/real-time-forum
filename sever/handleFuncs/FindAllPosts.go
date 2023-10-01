@@ -9,11 +9,6 @@ import (
 )
 
 func FindAllPosts() ([]PostFontEnd, error) {
-	database, err := sql.Open("sqlite3", "../sever/forum.db")
-	if err != nil {
-		return []PostFontEnd{}, err
-
-	}
 	rows, err := database.Query("SELECT Id,Title,Body,UserId,Created FROM Posts ORDER BY Created DESC")
 	if err == sql.ErrNoRows {
 		return []PostFontEnd{}, err

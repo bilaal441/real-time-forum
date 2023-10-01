@@ -4,8 +4,9 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
-	"sever/dbfuncs"
+	dbfuncs "sever/dbfuncs"
 	handlefuncs "sever/handleFuncs"
 	"sync"
 	"time"
@@ -13,13 +14,17 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-func DeleteUserByUsername(username string) error {
-	db, err := sql.Open("sqlite3", "./forum.db")
-	if err != nil {
-		return err
-	}
-	defer db.Close()
+var db *sql.DB
 
+func init() {
+    var err error
+    db, err = sql.Open("sqlite3", "../sever/forum.db")
+    if err != nil {
+        log.Fatal("Invalid DB config:", err)
+    }
+}
+
+func DeleteUserByUsername(username string) error {
 	stmt, err := db.Prepare("DELETE FROM Users WHERE firstname= ?")
 	if err != nil {
 		return err
@@ -177,6 +182,9 @@ func broadcastUserList(id string) {
 }
 
 func main() {
+	defer db.Close()
+	handlefuncs.SetDatabase(db)
+	dbfuncs.SetDatabase(db)
 	http.HandleFunc("/ws", handleConnection)
 	http.HandleFunc("/newUser", handlefuncs.HandleNewUser)
 	http.HandleFunc("/check-nickname", handlefuncs.HanndleUserNameIsDbOrEmail)

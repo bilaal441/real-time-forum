@@ -1,7 +1,6 @@
 package handlefuncs
 
 import (
-	"database/sql"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -29,12 +28,7 @@ func HandleValidateCookie(w http.ResponseWriter, r *http.Request) {
 		var username string
 		var imgURL string
 		var id string
-		db, err := sql.Open("sqlite3", "./forum.db")
-		if err != nil {
-			http.Error(w, `{"error": "`+err.Error()+`"}`, http.StatusInternalServerError)
-			return
-		}
-		defer db.Close()
+
 		// var storedPassword string
 
 		query := `
@@ -44,7 +38,7 @@ JOIN Users ON Sessions.UserID = Users.Id
 WHERE Sessions.Id = ?
 
 `
-		err = db.QueryRow(query, cookie.Value).Scan(&username, &id, &imgURL)
+		err = database.QueryRow(query, cookie.Value).Scan(&username, &id, &imgURL)
 
 		if err != nil {
 			http.Error(w, `{"error": "something went wrong "}`, http.StatusBadRequest)

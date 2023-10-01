@@ -39,7 +39,7 @@ func MessagesHandler(w http.ResponseWriter, r *http.Request) {
     ORDER BY Created DESC
     LIMIT ? OFFSET ?
 `
-		rows, err := db.Query(query, entredData.CurrUser, entredData.OtherUser, entredData.OtherUser, entredData.CurrUser, batchSize, offset)
+		rows, err := database.Query(query, entredData.CurrUser, entredData.OtherUser, entredData.OtherUser, entredData.CurrUser, batchSize, offset)
 		if err != nil {
 			http.Error(w, `{"error": "`+err.Error()+`"}`, http.StatusInternalServerError)
 			return

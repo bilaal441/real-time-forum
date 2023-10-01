@@ -1,17 +1,10 @@
 package handlefuncs
 
 import (
-	"database/sql"
-
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func FindAllCats() ([]Categories, error) {
-	database, err := sql.Open("sqlite3", "../sever/forum.db")
-	if err != nil {
-		return []Categories{}, err
-
-	}
 	rows, err := database.Query("SELECT * FROM Categories")
 	if err != nil {
 		return []Categories{}, err

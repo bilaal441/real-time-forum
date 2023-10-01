@@ -9,12 +9,6 @@ import (
 )
 
 func FindPostsComment(id string) (Comment, error) {
-	database, err := sql.Open("sqlite3", "./forum.db")
-	if err != nil {
-		return Comment{}, err
-	}
-
-	defer database.Close()
 	rows, err := database.Query("SELECT Id,Body, UserId,PostId,Created FROM Comments WHERE PostId=?", id)
 	if err == sql.ErrNoRows {
 		fmt.Println(err)

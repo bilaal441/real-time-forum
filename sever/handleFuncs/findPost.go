@@ -7,16 +7,10 @@ import (
 )
 
 func FindPostByID(id string) (PostFontEnd, error) {
-	database, err := sql.Open("sqlite3", "../sever/forum.db")
-	if err != nil {
-		return PostFontEnd{}, err
-	}
-	defer database.Close()
-
 	var One PostFontEnd
 	var userId string
 
-	err = database.QueryRow("SELECT Id,Title,Body,UserId,Created FROM Posts WHERE Id=?", id).Scan(&One.Id, &One.Title, &One.Body, &userId, &One.Created_at)
+	err := database.QueryRow("SELECT Id,Title,Body,UserId,Created FROM Posts WHERE Id=?", id).Scan(&One.Id, &One.Title, &One.Body, &userId, &One.Created_at)
 
 	if err != nil {
 		if err == sql.ErrNoRows {

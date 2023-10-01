@@ -1,7 +1,6 @@
 package handlefuncs
 
 import (
-	"database/sql"
 	"encoding/json"
 	"net/http"
 	"sever/dbfuncs"
@@ -27,13 +26,6 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, `{"error": "`+errj.Error()+`"}`, http.StatusBadRequest)
 			return
 		}
-		var db *sql.DB
-		db, err := sql.Open("sqlite3", "./forum.db")
-		if err != nil {
-			http.Error(w, `{"error": "`+err.Error()+`"}`, http.StatusInternalServerError)
-			return
-		}
-		defer db.Close()
 
 		var id string
 		var username string
@@ -41,7 +33,7 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 		var imgUrl string
 
 		// var storedPassword string
-		err = db.QueryRow("SELECT Id, password, Nickname,  profileImg  FROM Users WHERE nickname=? OR email=?", entredData.Nickname, entredData.Email).Scan(&id, &storedPassword, &username, &imgUrl)
+		err := database.QueryRow("SELECT Id, password, Nickname,  profileImg  FROM Users WHERE nickname=? OR email=?", entredData.Nickname, entredData.Email).Scan(&id, &storedPassword, &username, &imgUrl)
 		if err != nil {
 			http.Error(w, `{"error": "your email/nickname or password is incorrect"}`, http.StatusBadRequest)
 			return

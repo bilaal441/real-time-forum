@@ -2,9 +2,9 @@ import View from "./view.js";
 
 const formatedDate = (date) => {
   const createdDate = new Date(date);
-  return ` ${createdDate.getDate() < 10 ? 0 : ""}${createdDate.getDate()}/0${
-    createdDate.getMonth() + 1
-  }/${createdDate.getFullYear()}`;
+  return ` ${createdDate.getDate() < 10 ? 0 : ""}${createdDate.getDate()}/${
+    createdDate.getMonth() < 9 ? 0 : ""
+  }${createdDate.getMonth() + 1}/${createdDate.getFullYear()}`;
 };
 
 const getTime = (date) => {
@@ -178,8 +178,8 @@ class PostView extends View {
       const parent = el.closest(".post");
 
       if (!parent) return;
-      const {id: postId} = parent.dataset;
-      const {query} = el.dataset;
+      const { id: postId } = parent.dataset;
+      const { query } = el.dataset;
       if (
         query === "post-comment" ||
         query === "post-like" ||
@@ -189,10 +189,10 @@ class PostView extends View {
       ) {
         if (query.includes("comment-")) {
           const parent = el.closest(".comment");
-          const {id: commentId} = parent.dataset;
-          callBack({query: query, postId, commentId});
+          const { id: commentId } = parent.dataset;
+          callBack({ query: query, postId, commentId });
         } else {
-          callBack({query, postId});
+          callBack({ query, postId });
         }
       }
     });
@@ -208,7 +208,7 @@ class PostView extends View {
       if (formValues.comment === "") {
         return;
       }
-      callBack({body: formValues.comment, post_id: postId});
+      callBack({ body: formValues.comment, post_id: postId });
     });
   }
 }

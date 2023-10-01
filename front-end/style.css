@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Treasure Map";
+  src: url("Treasuremap-Ea1vj.ttf");
+}
+
 :root {
   --primary-color: #2c3e50;
   --secondary-color: #3498db;
@@ -5,11 +10,6 @@
   --text-color: #313131;
   --highlight-color: #ffd700;
   --font-size: 16px;
-}
-
-@font-face {
-  font-family: "Treasure Map";
-  src: url("Treasuremap-Ea1vj.ttf");
 }
 
 body {
@@ -52,7 +52,6 @@ body {
 
 .wave:nth-of-type(2) {
   top: -175px;
-  height: 175;
   animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
     swell 7s ease -1.25s infinite;
   opacity: 1;
@@ -465,6 +464,7 @@ button[type="submit"] {
   flex: 1;
   padding: 10px;
   border: 1px solid #ccc;
+  font-family: "Treasure Map";
 }
 
 .input-container button {
@@ -809,6 +809,7 @@ button[type="submit"] {
   border: none;
   outline: none;
   background: none;
+  font-family: "Treasure Map";
 }
 
 .addcomment-form .btn {

@@ -1,7 +1,6 @@
 package handlefuncs
 
 import (
-	"database/sql"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -38,15 +37,8 @@ func HandleCommenttLikeDislike(w http.ResponseWriter, r *http.Request) {
 		}
 
 		var userID string
-		var db *sql.DB
-		db, err = sql.Open("sqlite3", "./forum.db")
-		if err != nil {
-			http.Error(w, `{"error": "`+err.Error()+`"}`, http.StatusInternalServerError)
-			return
-		}
-		defer db.Close()
 
-		err = db.QueryRow("SELECT UserId FROM Sessions WHERE Id=?", cookie.Value).Scan(&userID)
+		err = database.QueryRow("SELECT UserId FROM Sessions WHERE Id=?", cookie.Value).Scan(&userID)
 		if err != nil {
 			http.Error(w, `{"error": "`+err.Error()+`"}`, http.StatusInternalServerError)
 			return
