@@ -9,8 +9,6 @@ import (
 )
 
 func FindLikeUsers(PostId string) []string {
-	database, _ := sql.Open("sqlite3", "../sever/forum.db")
-
 	rows, err := database.Query("SELECT UserId FROM Likes WHERE PostId=? AND Liked=1", PostId)
 	if err == sql.ErrNoRows {
 		return nil

@@ -7,10 +7,6 @@ import (
 )
 
 func AddDislikes(UserID, PostId string) error {
-	database, err := sql.Open("sqlite3", "../sever/forum.db")
-	if err != nil {
-		return err
-	}
 	newDislike, err := database.Prepare("INSERT INTO Likes VALUES (?,?,?,?)")
 	if err != nil {
 		return err

@@ -1,7 +1,6 @@
 package dbfuncs
 
 import (
-	"database/sql"
 	"fmt"
 	"net/http"
 
@@ -13,15 +12,9 @@ func CheckValueInDB(w http.ResponseWriter, r *http.Request, val, name string) (s
 		return "Invalid column name", false, nil
 	}
 
-	db, err := sql.Open("sqlite3", "./forum.db")
-	if err != nil {
-		return "Error connecting to database", false, err
-	}
-	defer db.Close()
-
 	var count int
 	query := fmt.Sprintf("SELECT COUNT(*) FROM users WHERE %s = ?", name)
-	err = db.QueryRow(query, val).Scan(&count)
+	err := database.QueryRow(query, val).Scan(&count)
 	if err != nil {
 		return "Error querying database", false, err
 	}

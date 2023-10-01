@@ -1,7 +1,6 @@
 package dbfuncs
 
 import (
-	"database/sql"
 	"time"
 
 	"github.com/google/uuid"
@@ -9,7 +8,6 @@ import (
 )
 
 func AddCat(CatName string, CatDesc string) {
-	database, _ := sql.Open("sqlite3", "../sever/forum.db")
 	id, _ := uuid.NewRandom()
 	created := time.Now()
 	statement, _ := database.Prepare("INSERT INTO Categories VALUES (?,?,?,?)")

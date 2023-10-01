@@ -1,7 +1,6 @@
 package dbfuncs
 
 import (
-	"database/sql"
 	"fmt"
 	"time"
 
@@ -13,12 +12,6 @@ func AddMessage(sender_id, recipient_id, message, Type string) (uuid.UUID, time.
 	if Type != "message" || sender_id == "" || recipient_id == "" || message == "" {
 
 		return uuid.Nil, time.Now(), fmt.Errorf("invalid error")
-	}
-
-	database, err := sql.Open("sqlite3", "../sever/forum.db")
-	if err != nil {
-		fmt.Println(err, "AddMessage line 15")
-		return uuid.Nil, time.Now(), err
 	}
 
 	id, err := uuid.NewRandom()

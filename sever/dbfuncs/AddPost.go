@@ -1,7 +1,6 @@
 package dbfuncs
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 	"time"
@@ -11,11 +10,6 @@ import (
 )
 
 func AddPost(cookieVal,  PostTitle, PostBody string, categories []string)( string, error) {
-	database, err := sql.Open("sqlite3", "../sever/forum.db")
-	if err != nil {
-		return "", err
-	}
-
 	id, err := uuid.NewRandom()
 	if err != nil {
 		return "", err

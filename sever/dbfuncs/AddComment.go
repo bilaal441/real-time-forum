@@ -1,7 +1,6 @@
 package dbfuncs
 
 import (
-	"database/sql"
 	"time"
 
 	"github.com/google/uuid"
@@ -10,10 +9,6 @@ import (
 
 func AddComment(Comment, SessionId string, PostId string) ( string ,error) {
 	// fmt.Println(Comment, SessionId, PostId)
-	database, err := sql.Open("sqlite3", "../sever/forum.db")
-	if err != nil {
-		return "", err
-	}
 	id, err := uuid.NewRandom()
 	if err != nil {
 		return "", err

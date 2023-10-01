@@ -8,7 +8,6 @@ import (
 )
 
 func DislikeComment(UserID, CommentId string) {
-	database, _ := sql.Open("sqlite3", "../sever/forum.db")
 	newDislike, _ := database.Prepare("INSERT INTO CommentLikes VALUES (?,?,?,?)")
 	updateDislike, _ := database.Prepare("UPDATE CommentLikes SET Liked=?, Disliked=? WHERE UserId=? AND CommentId=?")
 	row := database.QueryRow("SELECT Liked, Disliked FROM CommentLikes WHERE UserId=? AND CommentId=?", UserID, CommentId)

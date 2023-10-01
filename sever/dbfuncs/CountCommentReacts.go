@@ -8,7 +8,6 @@ import (
 )
 
 func CountCommentReacts(CommentId string) (likes, dislikes int) {
-	database, _ := sql.Open("sqlite3", "../sever/forum.db")
 	rows, err := database.Query("SELECT Liked, Disliked FROM CommentLikes WHERE CommentId=?", CommentId)
 	if err == sql.ErrNoRows {
 		return 0, 0

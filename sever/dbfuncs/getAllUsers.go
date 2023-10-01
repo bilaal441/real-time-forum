@@ -22,11 +22,6 @@ type User struct {
 }
 
 func GetAllUsersSortedByLastMessage(id string) ([]User, error) {
-	database, err := sql.Open("sqlite3", "../sever/forum.db")
-	if err != nil {
-		return nil, err
-	}
-	defer database.Close()
 	query := `
 	SELECT
 			u.Id,
