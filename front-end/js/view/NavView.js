@@ -11,7 +11,7 @@ class NavView extends View {
     return `<div class="container">
    <div class="nav-container">
      <div class="logo">
-       <a href="#"> realtime</a>
+       <a href="#">⌛ Realtime </a>
      </div>
      <div>
        <input
@@ -26,8 +26,8 @@ class NavView extends View {
        </label>
        <div class="nav-bar">
          <ul class="menu-items">
-           <li><button class="logout" type="button">Logout</button></li>
-           <li><span>${data.username}</span></li>
+           <li><button class="logout" type="button">☠️ Logout</button></li>
+           <li><span>🦜 ${data.username}</span></li>
          </ul>
        </div>
      </div>
