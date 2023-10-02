@@ -360,7 +360,7 @@ button[type="submit"] {
   height: 15px;
   background-color: rgb(0, 193, 0);
   border-radius: 50%;
-  /* border: 2px solid white; */
+  border: 2px solid white;
   z-index: 1;
 }
 
@@ -378,7 +378,7 @@ button[type="submit"] {
 }
 
 .open {
-  transform: translateX(0) translateY(-40px);
+  transform: translateX(-1px) translateY(-80px);
 }
 
 .close-chat {
@@ -839,6 +839,7 @@ button[type="submit"] {
 .users-chats-conatiner {
   position: sticky;
   top: 80px;
+  max-height: 60vh;
 }
 
 .users-container {
@@ -847,7 +848,7 @@ button[type="submit"] {
   position: sticky;
   width: 360;
   /* max-width: 26%; */
-  max-height: 67%;
+  max-height: 60vh;
   border-radius: 5px;
   overflow: auto;
 }
