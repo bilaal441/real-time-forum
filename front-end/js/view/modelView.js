@@ -1,6 +1,6 @@
 import View from "./view.js";
 
-class ModdleView extends View {
+class ModelView extends View {
   openModalBtn = document.getElementById("openModalBtn");
   closeModalBtn = document.getElementById("closeModalBtn");
   modal = document.getElementById("myModal");
@@ -34,4 +34,4 @@ class ModdleView extends View {
   }
 }
 
-export default new ModdleView();
+export default new ModelView();

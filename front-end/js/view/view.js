@@ -60,11 +60,11 @@ class View {
     }
   }
 
-  addfadeBody() {
-    document.body.classList.remove("fade");
-    document.body.classList.add("fade");
+  addfadeBody(el) {
+    el.classList.remove("fade");
+    el.classList.add("fade");
     setTimeout(() => {
-      document.body.classList.remove("fade");
+      el.classList.remove("fade");
     }, 2000);
   }
 }

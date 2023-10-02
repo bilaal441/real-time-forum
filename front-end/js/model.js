@@ -1,4 +1,4 @@
-import {getJson} from "./helpers.js";
+import { getJson } from "./helpers.js";
 
 export const state = {
   isLogin: false,
@@ -48,7 +48,7 @@ export const signupModel = async (data) => {
   try {
     const res = getJson("newUser", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
   } catch (err) {
@@ -118,7 +118,7 @@ export const getUsers = async () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({id: state.id}),
+      body: JSON.stringify({ id: state.id }),
       credentials: "include",
     });
     state.users = res;
@@ -151,7 +151,7 @@ export const getMessages = async (otherUserId) => {
     state.chatPage++;
 
     return res.messages.map((el) => {
-      const {FirstName, LastName} = state.users.find(
+      const { FirstName, LastName } = state.users.find(
         (user) => user.Id === el.sender_id
       );
       return {
@@ -184,7 +184,7 @@ export const setOpenChat = (id) => {
   state.chatOpenId = id;
 };
 
-export const logoutModdel = async () => {
+export const logoutModel = async () => {
   try {
     const res = await getJson("logout", {
       method: "POST",
@@ -228,7 +228,7 @@ export const addPost = async function (data) {
     console.log(cats);
     const res = await getJson("add-post", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify({
         title: data.title,
@@ -243,11 +243,11 @@ export const addPost = async function (data) {
   }
 };
 const findPostHelper = (id) => state.posts.find((el) => el.id === id);
-export const likeDislikePostModdel = async (data) => {
+export const likeDislikePostModel = async (data) => {
   try {
     const res = await getJson("react-Post-like-dislike", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify(data),
     });
@@ -287,11 +287,11 @@ export const likeAndDislikeComment = async (data) => {
   try {
     const res = await getJson("react-comment-like-dislike", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify(data),
     });
-    const {comments} = state.posts.find((el) => el.id === data.postId);
+    const { comments } = state.posts.find((el) => el.id === data.postId);
     const comment = comments.find((el) => el.id === data.commentId);
     console.log(comment);
     comment.dislikes = res.dislikes;
@@ -302,20 +302,20 @@ export const likeAndDislikeComment = async (data) => {
   }
 };
 
-export const addCommentModdel = async (data) => {
+export const addCommentModel = async (data) => {
   try {
     const res = await getJson("add-Comment", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify(data),
     });
     state.posts = state.posts.map((el) => {
       if (el.id === res.id) {
         if (el.comment) {
-          return {...el, comments: [res.comment, ...el.comments]};
+          return { ...el, comments: [res.comment, ...el.comments] };
         } else {
-          return {...el, comments: [res.comment]};
+          return { ...el, comments: [res.comment] };
         }
       } else {
         return el;

@@ -7,10 +7,10 @@ class OnlineUsers extends View {
   handleUserCardClick(callBack) {
     this.parentEl.addEventListener("click", (event) => {
       const userCard = event.target.closest("#user-card");
+      if (!userCard) return;
       const isOnline = userCard
         .querySelector(".indicator")
         ?.classList.contains("online-indicator");
-      if (!userCard) return;
       this.chatContainer.classList.add("open");
       const userId = userCard.dataset.userid;
       this.parentEl.classList.add("hidden");

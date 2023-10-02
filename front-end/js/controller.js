@@ -18,17 +18,17 @@ import {
   formatedDate,
   setOpenChat,
   throttle,
-  logoutModdel,
+  logoutModel,
   sortLastMessage,
   setOnlineUsersId,
   getCategoriesModel,
   addPost,
   getPostsModel,
-  likeDislikePostModdel,
+  likeDislikePostModel,
   likeAndDislikeComment,
-  addCommentModdel,
-} from "./moddel.js";
-import moddleView from "./view/moddleView.js";
+  addCommentModel,
+} from "./model.js";
+import modelView from "./view/modelView.js";
 import addPostView from "./view/addPostView.js";
 import filterView from "./view/filterView.js";
 
@@ -157,7 +157,7 @@ function ws() {
 
       state.audio1.currentTime = 0;
       state.audio1.play();
-      ChatView.addfadeBody();
+      ChatView.addfadeBody(document.querySelector(".container"));
       if (state.chatOpenId !== sender_id) return;
       ChatView.renderMessage([
         [
@@ -284,7 +284,7 @@ export const controllLogout = async () => {
       })
     );
     state.socket.close();
-    await logoutModdel();
+    await logoutModel();
     NavView.hidde();
     LoginView.showloginSignupEl();
     LoginView.hiddeMainSection();
@@ -297,7 +297,7 @@ export const controllLogout = async () => {
 
 const controllAddComment = async (data) => {
   try {
-    const fetchData = await addCommentModdel(data);
+    const fetchData = await addCommentModel(data);
     PostView.renderOneComment(...fetchData);
   } catch (err) {
     console.log(err);
@@ -307,7 +307,7 @@ const controllAddComment = async (data) => {
 const controllPostActions = async (data) => {
   try {
     const helperLikeDislike = async () => {
-      const post = await likeDislikePostModdel({
+      const post = await likeDislikePostModel({
         query: data.query.split("-")[1],
         postid: data.postId,
       });
@@ -358,7 +358,7 @@ const controllPostActions = async (data) => {
   ChatView.closeChat(resetChatPage);
   ChatView.sendMessageHandler(controllSendMessage);
   NavView.logoutHandler(controllLogout);
-  moddleView.openModalHandler(controllAddPostForm);
+  modelView.openModalHandler(controllAddPostForm);
   addPostView.addPostFormForSubmissionHandler(controllAddPost);
   PostView.postActionsHandler(controllPostActions);
 })();

@@ -342,7 +342,7 @@ button[type="submit"] {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  overflow: hidden;
+  overflow: visible;
   margin-right: 10px;
 }
 
@@ -358,9 +358,10 @@ button[type="submit"] {
   right: 0;
   width: 15px;
   height: 15px;
-  background-color: green;
+  background-color: rgb(0, 193, 0);
   border-radius: 50%;
-  border: 2px solid white;
+  /* border: 2px solid white; */
+  z-index: 1;
 }
 
 .chat-container {
@@ -624,6 +625,10 @@ button[type="submit"] {
   position: relative;
 }
 
+.modal-content input {
+  font-family: "Treasure Map";
+}
+
 .close {
   position: absolute;
   top: 10px;
@@ -800,16 +805,19 @@ button[type="submit"] {
   border-radius: 10px;
   border: 1px solid #ccc;
   justify-content: space-between;
-  align-items: start;
+  align-items: center;
 }
 
 .addcomment-form input {
-  padding: 0.6rem;
+  /* padding: 0.6rem; */
   width: 80%;
   border: none;
   outline: none;
   background: none;
   font-family: "Treasure Map";
+  height: 18px;
+  margin: 0;
+  line-height: 40px;
 }
 
 .addcomment-form .btn {
@@ -838,7 +846,9 @@ button[type="submit"] {
   padding: 1rem;
   position: fixed;
   max-width: 26%;
+  max-height: 67%;
   border-radius: 5px;
+  overflow: auto;
 }
 
 .fade {
@@ -847,12 +857,12 @@ button[type="submit"] {
 
 @keyframes fade {
   0% {
-    background: var(--secondary-color);
+    background: black;
   }
   10% {
-    background: #81bde4;
+    background: rgb(224, 223, 223);
   }
   100% {
-    background: var(--secondary-color);
+    background: black;
   }
 }
