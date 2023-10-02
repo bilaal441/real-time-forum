@@ -11,7 +11,7 @@ class NavView extends View {
     return `<div class="container">
    <div class="nav-container">
      <div class="logo">
-       <a href="#">⌛ Realtime </a>
+       <a href="#">⏳ Realtime ⌛</a>
      </div>
      <div>
        <input

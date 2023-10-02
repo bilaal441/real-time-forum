@@ -365,7 +365,7 @@ button[type="submit"] {
 }
 
 .chat-container {
-  transform: translateX(-100vw);
+  transform: translateX(-120vw) translateY(-40px);
   width: 360px;
   max-height: 800px;
   background-color: white;
@@ -374,11 +374,11 @@ button[type="submit"] {
   padding: 1rem;
   border: 5px;
   border-radius: 5px;
-  position: fixed;
+  position: sticky;
 }
 
 .open {
-  transform: translateX(0);
+  transform: translateX(0) translateY(-40px);
 }
 
 .close-chat {
@@ -410,7 +410,7 @@ button[type="submit"] {
 }
 .message-container {
   overflow: scroll;
-  max-height: 300px;
+  max-height: 240px;
   scroll-behavior: smooth;
   padding: 0rem 1rem;
 }
@@ -844,8 +844,9 @@ button[type="submit"] {
 .users-container {
   background-color: #fff;
   padding: 1rem;
-  position: fixed;
-  max-width: 26%;
+  position: sticky;
+  width: 360;
+  /* max-width: 26%; */
   max-height: 67%;
   border-radius: 5px;
   overflow: auto;
