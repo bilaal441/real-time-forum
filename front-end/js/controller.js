@@ -137,7 +137,7 @@ function ws() {
   state.socket = new WebSocket(`ws://localhost:3000/ws`);
 
   state.socket.addEventListener("open", (event) => {
-    state.socket.send("Hello, server!");
+    state.socket.send(JSON.stringify("Hello, server!"));
     controlClearTypingInDicator();
     console.log("WebSocket connection opened", event.data);
   });
