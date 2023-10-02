@@ -129,7 +129,7 @@ func handleConnection(w http.ResponseWriter, r *http.Request) {
 		id, created, err := dbfuncs.AddMessage(receivedData.SenderID, receivedData.RecipientID, receivedData.Message, receivedData.Type)
 		messageLock.Unlock()
 		if err != nil {
-			fmt.Println(err, "error adding message in the data base main line 120")
+			fmt.Println(err, "error adding message in the data base main line 132")
 		}
 
 		receivedData.ID = id.String()

@@ -137,15 +137,17 @@ function ws() {
   state.socket = new WebSocket(`ws://localhost:3000/ws`);
 
   state.socket.addEventListener("open", (event) => {
-    state.socket.send({
-      type: "testing",
-      ID: "",
-      SenderID: "",
-      RecipientID: "",
-      Created: "",
-      Typing: "",
-      Message: "",
-    });
+    state.socket.send(
+      JSON.stringify({
+        type: "testing",
+        ID: "",
+        SenderID: "",
+        RecipientID: "",
+        Created: "",
+        Typing: false,
+        Message: "",
+      })
+    );
     controlClearTypingInDicator();
     console.log("WebSocket connection opened", event.data);
   });
