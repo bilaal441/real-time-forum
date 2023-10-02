@@ -68,7 +68,5 @@ func MessagesHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(response)
-	} else {
-		http.Error(w, "405 Method Not Allowed", http.StatusMethodNotAllowed)
 	}
 }
