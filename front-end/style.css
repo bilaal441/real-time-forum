@@ -484,6 +484,7 @@ button[type="submit"] {
   font-weight: bold;
   font-size: 1.1rem;
   text-transform: capitalize;
+  width: 120px;
 }
 
 .gap {
@@ -556,7 +557,7 @@ button[type="submit"] {
 
 .user-card-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   justify-content: space-between;
   gap: 0.8em;
   align-items: start;
